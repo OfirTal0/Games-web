@@ -1,7 +1,6 @@
 # GAMES WEB APPLICATION
 
-A web-based application that helps users organize and manage their tasks and contacts effectively. 
-Welcome to my Game Web Application!
+Welcome to my Game Web Application! A responsive web-based application for web and mobile. 
 This platform offers a collection of small games, including Simon Game, Cards War Game, Memory Game (JavaScript-based), and a Trivia Game (Python-based).
 Users can enjoy playing these games and compete for the best scores!
 
