@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block memory_game_base %}
+
+
+
+<link rel="stylesheet" href="static\memorygame.css">
+<div class="profilenavbar">
+    <div class="profile">
+        <img class="userimg" src="/static/images/profileimg/{{ profileimg }}.png" alt=""> 
+        <h3>{{ username }} Good Luck!</h3>
+    </div>
+    <div id="points" class="points">
+        50
+    </div>
+</div>
+<div class="gameboard">
+
+
+<div class="game_info" id="start">
+    <h1>The memory game</h1>
+    <p>For start you have 50 points</p>
+    <p>Each error will cost you 2 points, your goal is to match all pairs</p>
+    <p>With as few mistakes as possible! GOOD LUCK!</p>
+    <button onclick="startGame()" class="start-button" id="start-button">Let's play</button>
+
+</div>
+<div id="options" class="options" style="display:none;">
+    <h3>Choose a catagory:</h3>
+    <button onclick="option(this)" class="option-button" id="option">animals</button>
+    <button onclick="option(this)" class="option-button" id="option">space</button>
+    <button onclick="option(this)" class="option-button" id="option">socialmedia</button>
+</div>
+
+<div id="gamerows" class="gamerows" style="display:none;">
+<div class="row">
+    <button  id="sq0" class="4 squre"></button>
+    <button  id="sq1" class="1 squre"></button>
+    <button  id="sq2" class="2 squre"></button>
+    <button  id="sq3" class="3 squre"></button>
+</div>
+<div class="row">
+    <button  id="sq4" class="8 squre"></button>
+    <button  id="sq5" class="5 squre"></button>
+    <button  id="sq6" class="6 squre"></button>
+    <button  id="sq7" class="7 squre"></button>
+</div>
+<div class="row">
+    <button  id="sq8" class="8 squre"></button>
+    <button  id="sq9" class="9 squre"></button>
+    <button  id="sq10" class="10 squre"></button>
+    <button  id="sq11" class="11 squre"></button>
+</div>
+<div class="row">
+    <button  id="sq12" class="12 squre"></button>
+    <button  id="sq13" class="13 squre"></button>
+    <button  id="sq14" class="14 squre"></button>
+    <button  id="sq15" class="15 squre"></button>
+</div>
+</div>
+</div>
+
+<script src="{{ url_for('static', filename='js/memorygame.js') }}"></script>
+{% endblock %}

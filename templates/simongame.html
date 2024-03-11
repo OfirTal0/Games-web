@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block simon_game_base %}
+
+<link rel="stylesheet" href="static\simonstyle.css">
+<div class="profilenavbar">
+    <div class="profile">
+        <img class="userimg" src="/static/images/profileimg/{{ profileimg }}.png" alt=""> 
+        <h3>{{ username }} Good Luck!</h3>
+    </div>
+    <div id ="points" class="points">
+    0
+    </div>
+</div>
+<div class="gameboard">
+
+    <div class="simoncontainer" id="simoncontainer">
+        <div class="game_info" id="start">
+            <h1>The simon game</h1>
+            <p>Starting with 1 point, your goal is to reach the highest level possible.</p>
+            <p>Follow the pattern shown by the game by clicking on the colored buttons.</p>
+            <p>Be careful! A mistake will end the game !</p>
+            <p>How far can you go? Give it a try and test your memory skills!</p>
+            <button onclick="startGame()" class="start-button" id="start-button">Let's play</button>
+        </div>
+        <div style="display:flex">
+            <div>Your Highest Level: </div>
+            <div id="highestlevel">{{simon_highest_score}}</div>
+        </div>
+        <div  id="level" style="display:none;" >Level: 1</div >
+    <div class="set1" id="set1" style="display:none;">
+        <button  id="green" class="green squre"></button>
+        <button  id="red" class="red squre"></button>
+    </div>
+    <div class="set2" id="set2"style="display:none;">
+        <button  id="yellow" class="yellow squre"></button>
+        <button  id="blue" class="blue squre"></button>
+    </div>
+    </div>
+    <div id ="gameover" class="gameover" style="display:none;">
+        <h1>The Simon Game</h1>
+        <h2>Game Over</h2>
+        <h2 id="title">Press below to play again</h2>
+        <button onclick="playAgain()" class="play-again-button" id="play-again-button">Play again</button>
+    </div>
+</div>
+
+
+<script src="{{ url_for('static', filename='js/simongame.js') }}"></script>
+{% endblock %}

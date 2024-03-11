@@ -1,0 +1,114 @@
+
+{% extends "base.html" %}
+
+{% block admin %}
+
+<link rel="stylesheet" href="static\admin.css">
+
+<div class="settingwindow">
+    <div class="navline">
+        <form action="/search" method="POST" style="display: flex;flex-direction: row;">
+            <input  class="searchinput" type="search" name="search_user" placeholder="search user" required>
+            <input type="hidden" name = "action" value="user">
+        </form>
+    </div>
+<div class="settingwindow2">
+    <div class="navsetting">
+        <button onclick="" class="navsettingtext" id="UserManagement">User Management</button>
+        <button onclick="" class="navsettingtext" id="">Account</button>
+        <button onclick="" class="navsettingtext" id="">Account</button>
+        <button onclick="" class="navsettingtext" id="">Account</button>
+    </div>
+    <div id="" class="content">
+        <div id="UserManagementHTML" class="inputcoul">
+        {% if action == 'Display' %}
+        <h3>User Management</h3>
+        <form action="/adminaction"form method="POST">
+        <div class="adminactions">
+            <input type="submit"  name="action" value="Display" class="navsettingtext">
+            <input type="submit"  name="action" value="Edit" class="navsettingtext">
+            {% if permission=='admin' %}
+            <input type="submit" name="action" value="Delete" class="navsettingtext">
+            <input type="submit"  name="action" value="Add" class="navsettingtext">
+            {% endif %}
+        </div>
+        {{ error }}
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Permission</th>
+                            <th>Profileimg</th>
+                            <th>Country</th>
+                        </tr>
+                    </thead>
+                <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>
+                        <input type="radio" name="selected_user" value="{{ user[0] }}">
+                    </td>
+                    <td>{{ user[0] }}</td>
+                    <td>{{ user[1] }}</td>
+                    <td>{{ user[2] }}</td>
+                    <td>{{ user[3] }}</td>
+                    <td>{{ user[4] }}</td>
+                </tr>
+            {% endfor %}
+                </tbody>
+                </table>
+            </form>
+            </div>
+    {% endif %}
+
+    {% if action == 'Edit' %}
+    <h3>Edit User</h3>
+    <form action="/adminedit" method="POST">
+        <div class="inputrow">
+            <div class="inputscoulmn">
+                <div class="textinput">User name</div>
+                <input type="text" name="username" class="classinputs" value = "{{ username_to_edit }}" required>
+                <div class="textinput">Profile image</div>
+                <select name="profileimg" class="classinputs" >
+                    <option value="ghost">Ghost</option>
+                    <option value="assasin">Assasin</option>
+                    <option value="ninja">Ninja</option>
+                    <option value="swordsman">Swordsman</option>
+                    <option value="wizard">Wizard</option>
+                </select>
+                {% if permission=='admin' %}
+                <div class="textinput">Permission</div>
+                <select name="permission" class="classinputs">
+                    <option value="view">View</option>
+                    <option value="edit">Edit</option>
+                    <option value="admin">Admin</option>
+                </select>
+                {% endif %}
+
+            </div> 
+            <div class="inputscoulmn">
+                <div class="textinput">Password</div>
+                <input type="text" name="password" class="classinputs" value= "{{ password_to_edit }}" required>
+                <div class="textinput">Country</div>
+                <input type="text" name="country" class="classinputs" value = "{{ country_to_edit }}" required>
+            </div>
+
+        </div>
+        <input type = "submit" name = "save_cancel" class="buttonsavecancel" value = "Save">
+        <input type = "submit" name = "save_cancel" class="buttonsavecancel" value = "Cancel">
+
+    </form>
+
+
+    {% endif %}
+
+    </div>
+
+    </div>
+
+</div>
+    
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block trivia_game_base %}
+<div class="profilenavbar">
+    <div class="profile">
+        <img class="userimg" src="/static/images/profileimg/{{ profileimg }}.png" alt=""> 
+        <h3>{{ username }} Good Luck!</h3>
+    </div>
+    <div id="points" class="points">
+        <div class="">{{ points }}</div>
+    </div>
+</div>
+<div class="gameboard">
+
+    <div class="thegame">
+        {% if trivia_display == 'start' %}
+
+            <div class="game_info">
+            {{message}}
+                <h1>Trivia Game</h1>
+                <p>Welcome to the trivia game!</p> 
+                <p>You earn 2 points for each correct answer, but be careful- three mistakes and you're out. </p>
+                    <p>Know the categories, read questions carefully, and use elimination to your advantage.</p>
+                    <p> Good luck and enjoy the game! </p>
+                    <form action="/trivia_game_options" method="POST">
+                        <input type="submit" value="Let's Play" style="padding:1%; margin-top:10px; background-color:black; color:white; border-radius: 10px; width:100px; font-size: larger;">
+                    </form>    
+                </div>
+
+        {% elif trivia_display == 'options' %}
+            <div class="options">
+                <h2 style="color: black;">Please choose category</h2>
+                <form action="/trivia_questions" method="POST">
+                    <input class="option1" name="category" type="submit" value="{{ category1 }}">
+                    <input class="option2" name="category" type="submit" value="{{ category2 }}">
+                </form>
+            </div>
+
+        {% elif trivia_display == 'questions' %}
+
+            <form action="/trivia_answer" method="POST" style="gap:20px;">
+                <h2 class="theques"> {{ question }} </h2>
+
+                <div class="row">
+                    <input class="question" name="answer" type="submit" value="{{ option1 }}" id="option1">
+                    <input class="question" name="answer" type="submit" value="{{ option2 }}" id="option2">
+                </div>
+                <div class="row">
+                    <input class="question" name="answer" type="submit" value="{{ option3 }}" id="option3">
+                    <input class="question" name="answer" type="submit" value="{{ option4 }}" id="option4">
+                </div>
+            </form>
+            
+
+        {% elif trivia_display == 'answers' %}
+
+        <div class="options">
+            <h2> {{ message }} </h2>
+            <form action="/trivia_game_options" method="POST">
+                <input class= "nextquestion" type="submit" value="Next question"  style="margin-top:10px; background-color:black; border-radius: 10px; width:150px; font-size: larger;">
+            </form>
+            <form action="/trivia_endgame" method="POST">
+                <input class= "nextquestion" type="submit" value="End round"  style="margin-top:10px; background-color:black; border-radius: 10px; width:150px; font-size: larger;">
+            </form>
+        </div>
+
+
+        {% elif trivia_display == 'endgame' %}
+
+        <div class="options">
+            <h2> {{ message }} </h2>
+            <form action="/trivia_endgame" method="POST">
+                <input class= "nextquestion" type="submit" value="Play again" style="margin-top:10px; padding:1%; background-color:black; border-radius: 10px; width:100px; font-size: larger;">
+            </form>
+        </div>
+
+        {% endif %}
+</div>
+</div>
+
+
+{% endblock %}

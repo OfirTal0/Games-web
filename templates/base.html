@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Game On</title>
+</head>
+<body>
+    <div class="container">
+        <div class="navbarmain">
+            <a href="/"><img class="mainlogo" src="/static/images/icons/home.png"></a>
+            <a href="/login"><img class="mainlogo" src="/static/images/icons/login.png" ></a>
+            <a href="/logout"><img class="mainlogo" src="/static/images/icons/logout.png"></a>
+            <a href="/score"><img class="mainlogo" src="/static/images/icons/board.png"></a>
+            {% if permission=='admin' or permission=='edit' %}
+            <a href="/admin"><img class="mainlogo" src="/static/images/profileimg/admin.png"></a>
+            {% endif %}   
+
+        </div>
+        <div class="board">
+            {% block dashbord %}
+            {% endblock %}
+            {% block login %}
+            {% endblock %}
+            {% block reset_password %}
+            {% endblock %}
+            {% block signup %}
+            {% endblock %}
+            {% block trivia_game_base %}
+            {% endblock %}
+            {% block simon_game_base %}
+            {% endblock %}
+            {% block memory_game_base %}
+            {% endblock %}
+            {% block war_game %}
+            {% endblock %}
+            {% block admin %}
+            {% endblock %}
+            {% block games %}
+            {% endblock %}
+            {% block score %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>
+

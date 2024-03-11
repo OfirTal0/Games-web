@@ -1,0 +1,159 @@
+.warcontainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.gameoverwar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    width: 130px;
+    height: 210px;
+    cursor: pointer;
+}
+
+.half {
+    width: 50%;
+}
+
+.computer_section {
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    width: 40%;
+    height: 70%
+}
+
+
+.player_section {
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+    height: 70%;
+    gap:10px;
+
+}
+
+.result_section {
+    width: 20%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+}
+
+.war_points {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    gap : 10px;
+}
+
+.section1 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+.thegame {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    margin-top: 20vh;
+}
+
+.align {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profilenavbar {
+    height: 20%;
+}
+
+.start-button {
+    padding:1%; 
+    background-color:black; 
+    color:white; 
+    border-radius: 10px; 
+    width: 120px;
+    font-size: larger;
+    display: block;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 40px;
+        }
+    
+    .navbarmain {
+        flex-direction: row;
+        padding: 3%;
+        height: fit-content;
+    }
+
+
+.board {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:fit-content;
+    width: 95vw;
+}
+
+.gameboard {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    align-items: center; 
+    justify-content: center;
+}
+
+.warcontainer {
+    height: fit-content;
+}
+
+.thegame {
+
+    margin-top: 20px;
+}
+
+.card {
+    width: 60px;
+    height: 120px;
+    cursor: pointer;
+}
+
+.section1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.gameimg {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.result_section {
+    margin-top: 17vh;
+    gap:5px;
+}
+
+h2 {
+    font-size: small;
+}
+}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+
+{% block login %}
+
+<script>
+    function validateLogin(){
+        let message = document.getElementById("message");
+        message.innerHTML = "";
+        let valid=true;
+        Array.from(document.getElementById("loginForm").getElementsByTagName("input")).map(
+            item=>{
+                if (item.value==""){
+                    message.innerHTML+=`Please fill out the ${item.name} <br>`;
+                    item.style.backgroundColor="pink";
+                    valid=false;
+                }
+            })
+        if (valid){
+            document.getElementById("loginForm").submit();
+        }
+    }
+</script>
+
+<div class="boxlogin">
+    <img class="loginimg" src="/static/images/profileimg/loginimg.png">
+    <form id="loginForm" action="/login" method="POST" >
+    <input onchange="this.style.backgroundColor='field';"  type="text" class="input" name="username" id="username" placeholder="Username">
+    <input onchange="this.style.backgroundColor='field';" type="password" class="input" name="password" id="password" placeholder="Password">
+</form> 
+<button class="botton" onclick="validateLogin()">Sign in</button>
+
+    <form action="/signup" method="POST">
+        <input type = "submit" class="botton" value = "Sign up">
+    </form>
+    
+    <a href="/reset_my_password">Forgot my password</a>
+    <div id="message" class="message"></div>
+    {{message}}
+    {{ error }}
+</div> 
+
+{% endblock %}

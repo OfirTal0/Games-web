@@ -1,0 +1,610 @@
+body {
+   
+    background-image: url('https://cdn.wallpapersafari.com/59/66/78ykIA.jpg');
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    color:white;
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; 
+    gap: 20px;
+}
+
+.board {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: center;
+    align-items: center; 
+    gap:30px;
+    height:92vh;
+    width: 90vw;
+}
+
+.gameboard {
+    background-color: rgba(240, 248, 255, 0.521);   
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    height: 85vh;
+    align-items: center; 
+    justify-content: center;
+}
+
+.thegame {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    color:black;
+    
+}
+
+.navbarmain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+    background-color: rgba(240, 248, 255, 0.2);
+    border-radius: 30px;
+    height: 90vh;
+    padding: 1%;
+}
+
+h3 {
+    margin:0;
+}
+
+h2 {
+    color: white;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+.mainlogo {
+    height: 25px;
+    width: 25px;
+
+}
+
+
+.navbar {
+
+    display: flex;
+    align-items: center;
+    width: 90vw;
+    background-color: rgba(240, 248, 255, 0.2);
+    border-radius: 30px;
+    padding: 1%;
+}
+
+.profilebar {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+    padding:1%;
+}
+
+.gameslink {
+    color:white;
+    /* position: absolute;
+    left: 80vw; /* Set the horizontal position */
+    /* top: 60px;  Set the vertical position */  
+    border-radius: 10px;
+    padding:10px;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bold;
+    background: linear-gradient(to right, #dea765,#de9133);
+
+
+
+}
+
+.userimg {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+.searchbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-left: 400px;
+}
+
+
+.search {
+    background-color: transparent;
+    height: 30px;
+    border: 1px solid white;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    box-shadow: 2px 1px white;
+    border-radius: 30px;
+}
+
+.search::placeholder {
+    color: white;
+}
+
+.searchlogo {
+    width: 30px;
+    height: 30px;
+    color: white;
+
+}
+
+.gametype {
+    background-image: url('dices.png');
+    background-size: cover;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.gametype:hover {
+    width: 65px;
+    height: 65px;
+
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.playerimg {
+    width: 30px;
+    height: 30px;
+
+}
+.players {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.section2 {
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    /* gap: 40px; */
+    width: 100%;
+
+}
+
+.scoreboard {
+    color: white;
+    background-color: rgba(60, 61, 61, 0.82);
+    border: 1px solid white;
+    border-radius: 30px;
+    padding: 3%;
+    max-height: 40vh;
+    overflow-y: scroll;
+}
+
+.scoreboardbig {
+    color: white;
+    background-color: rgba(60, 61, 61, 0.82);
+    border: 1px solid white;
+    border-radius: 30px;
+    padding: 3%;
+    width: 70vw;
+    max-height: 70vh;
+    overflow-y: scroll;
+
+}
+
+
+.scoreboard::-webkit-scrollbar,.scoreboardbig::-webkit-scrollbar, .games-container::-webkit-scrollbar {
+    width: 15px; 
+}
+
+.scoreboard::-webkit-scrollbar-thumb,.scoreboardbig::-webkit-scrollbar-thumb, .games-container::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.scoreboard-button:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+
+.games {
+    border-radius: 30px;
+    padding: 10px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.game {
+    background-color: rgba(240, 248, 255, 0.2);
+    width: 150px;
+    height: 120px;
+    border-radius: 30px;
+    display: flex; /* Add display flex to the .game class */
+    flex-direction: column; /* Stack the elements vertically */
+    align-items: center;
+    padding: 1%;
+    justify-content: center;
+}
+
+.gametitle {
+    font-family: Arial, sans-serif;
+    color: white;
+    padding:10px;
+}
+.competitionimg {
+    height: 210px;
+    width: 210px;
+}
+
+.gameimg {
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+
+}
+
+.gameimg:hover {
+    width: 80px;
+    height: 80px;
+    transition: all 0.5s;
+
+}
+
+
+.boxlogin {
+    border-radius: 30px;
+    box-shadow: 3px 3px gray ;
+    background-color: rgba(245, 245, 245, 0.489);
+    padding: 1%;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column; 
+    width: fit-content;
+    gap: 10px;
+    align-items: center;
+
+}
+
+.botton {
+    width: 80px;
+    box-shadow: 2px 2px gray;
+    cursor: pointer;
+}
+
+
+.loginimg {
+    width: 40%;
+
+}
+
+/* CSS to style the image selection container */
+.image-selection {
+    display: flex; /* Use flexbox to create a row layout */
+    justify-content: space-between; /* Space evenly between items */
+    margin-top: 10px; /* Add spacing from the previous input elements */
+}
+
+.image-selection label {
+    display: flex; /* Use flexbox to align items horizontally */
+    flex-direction: column; /* Stack image and radio button vertically */
+}
+
+.image-selection img {
+    max-width: 100px; /* Limit image width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Style the radio buttons (optional) */
+.image-selection input[type="radio"] {
+    margin-top: 5px; /* Add spacing between image and radio button */
+}
+
+input {
+    width: fit-content;
+    
+}
+
+/* trivia */
+
+.game_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color:black;
+}
+
+
+.profilenavbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 20vh;
+    gap: 45vw;
+}
+
+.profile {
+    display: flex;
+    gap:20px;
+    align-items: center;
+}
+
+
+.points {
+    background-color: white;
+    padding: 1%;
+    border-radius: 20px;
+    width: 20px;
+    height: fit-content;
+    font-family: sans-serif;
+    font-size: larger;
+    align-items: center;
+    color: black;
+}
+
+
+/* .triviacontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} */
+
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.option1 {
+    background-color:rgba(240, 128, 128, 0.525);
+    border: none;
+    border-radius: 10px;
+    padding:5%;
+    width: 150px;
+    height: 50px;
+    font-size:x-large;
+    box-shadow: 3px 3px gray ;
+
+    &:hover {
+        background-color: rgba(240, 128, 128);
+        color: black;
+        transition: all 0.5s;
+    }
+}
+
+.option2 {
+    background-color:rgba(120, 173, 162, 0.525);
+    border: none;
+    border-radius: 10px;
+    padding:5%;
+    width: 150px;
+    height: 50px;
+    font-size:x-large;
+    box-shadow: 3px 3px gray ;
+    margin-top:10px;
+
+    &:hover {
+        background-color:rgba(120, 173, 162);
+        color: black;
+        transition: all 0.5s;
+    }
+}
+
+
+.theques {
+    font-weight: bold;
+    font-size: medium;
+    margin-top: 7%;
+    color:black;
+}
+
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.games-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20vw;
+    align-items: center;
+}
+
+
+.question {
+    background-color:rgba(121, 127, 126, 0.525);
+    /* border: none; */
+    border-radius: 10px;
+    padding:2%;
+    width: 200px;;
+    height: 30px;
+    font-size:medium;
+    box-shadow: 3px 3px gray ;
+    align-items: center;
+
+    &:hover {
+        background-color:rgba(121, 127, 126);
+        color: black;
+        transition: all 0.5s;
+    }
+}
+
+.nextquestion {
+    border-radius: 5px;
+    background-color: rgba(21, 134, 21, 0.484);
+    color:white;
+}
+
+
+.player-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px; 
+}
+
+.player-table th, .player-table td {
+    padding: 5px;
+    text-align: center;
+}
+
+.player-table th,  .scoreboardbig th {
+    border-bottom: 2px solid white;
+    text-align: center;
+
+}
+
+.player-table td, .scoreboardbig td {
+    border-bottom: 1px solid white;
+    text-align: center;
+}
+
+.player-row:hover {
+    background-color: rgba(237, 237, 237, 0.9);
+    color:black;
+    border-radius: 30px;
+}
+
+.games-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap:10px;
+    overflow-y: scroll;
+    max-height: 80vh;
+    width: 60vw;
+} 
+
+.top_games {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap:20px;
+
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 40px;
+        }
+    
+    .navbarmain {
+        flex-direction: row;
+        padding: 4%;
+        height: fit-content;
+        width: 85vw;
+        justify-content: space-around;
+    }
+
+    .profilebar {
+        width: 87vw;
+
+    }
+
+
+.section2 {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    gap:30px;
+}
+.games {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.board {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:fit-content;
+    width: 95vw;
+}
+
+.top_games {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:20px;
+
+}
+.scoreboard {
+    background-color: rgba(240, 248, 255, 0.2);
+
+}
+
+.image-selection {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);    
+}
+
+.boxlogin {
+    width: 80vw;
+}
+
+.gameboard {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    height: fit-content;
+    align-items: center; 
+    justify-content: center;
+}
+
+.thegame {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    width: 70vw;
+    justify-content: center;
+}
+
+.row {
+    display:grid;
+
+}
+
+.searchbar {
+    margin-left: 0px;
+}
+
+.games-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap:10px;
+    height: fit-content;
+    width: 95%;
+} 
+
+.scoreboardbig {
+    width: 90vw;
+
+}
+}

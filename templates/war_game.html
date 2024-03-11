@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block war_game %}
+
+
+<link rel="stylesheet" href="static\warstyle.css">
+
+<div class="profilenavbar">
+    <div class="profile">
+        <img class="userimg" src="/static/images/profileimg/{{ profileimg }}.png" alt=""> 
+        <h3>{{ username }} Good Luck!</h3>
+    </div>
+    <div id="points" class="points">
+        0
+    </div>
+</div>
+
+<div class="gameboard">
+
+    <div class="warcontainer" id="warcontainer">
+        <div class="game_info" id="game_info">
+            <h1>War Game</h1>
+            <p>Welcome to the War Card Game!</p>
+            <p>Each player will reveal their top card in a quest for victory.</p>
+            <p>The winning card earns the player 2 points</p>
+            <p>After 10 rounds, the player with the highest total points</p>
+            <p>is crowned the ultimate winner</p>
+            <p>Press below to start</p>
+            <button onclick="startGame()" class="start-button" id="start-button">Let's play</button>
+        </div>
+
+        <div class="thegame" id="thegame" style="display:none;" >
+            <div class="gameoverwar" id="gameover" style="display:none;">
+                <img src="/static/images/gameimg/war.png" alt="" class="gameimg">
+                <h2>Round Over</h2>
+                <div class="" id="winner"></div>
+                <h2 id="title">Press below to play again</h2>
+                <button onclick="playAgain()" class="start-button" id="play-again-button">Play again</button>
+            </div>
+            <div class="section1">
+                <div class="player_section" id="player_section" >
+                        <div class="half">
+                            <img src="/static/images/war_cards/card.png" alt="" class="card">
+                        </div>
+                        <div class="half" id="player_card">
+                        </div>
+                </div> 
+                <div class="result_section" id="result_section" >
+                    <h2 id="rounds_num" class=""></h2>
+                    <img src="/static/images/gameimg/war.png" alt="" class="gameimg">
+
+                    <div class="war_points">
+                        <div class="align">
+                            <h2>Player</h2>
+                            <h2 id="player_points"></h2>
+                        </div>
+                        <div class="align">
+                            <h2>Computer</h2>
+                            <h2 id="computer_points"></h2>
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="computer_section" id="computer_section">
+                    <div class="half" id="computer_card">
+                        
+                    </div>
+                    <div class="half">
+                        <img src="/static/images/war_cards/card.png" alt=""  id="computer_card" class="card">
+                    </div>
+
+                </div>
+            </div>
+            <div style="margin-top:2vh">
+                <button onclick="round()" class="start-button" id="round-button">Open card</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="{{ url_for('static', filename='js/war.js') }}"></script>
+
+{% endblock %}

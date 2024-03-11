@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block dashbord %}
+<div class="navbar">
+    {% if login==True %}
+    <div class="profilebar">
+        <img class="userimg" src="/static/images/profileimg/{{ profileimg }}.png" alt=""> 
+        <div class="">
+        <h3>Hello, {{ username }}</h3>
+        <p> Welcome to Game On</p>
+    </div>
+    </div> 
+    {% else %} 
+    <div class="profilebar">
+        <img class="userimg" src="/static/images/icons/security.png" alt=""> 
+        <div class="">
+        <h3>Hello, Anonymous</h3> 
+        <p>Let us know you, and please LOGIN </p>
+    </div>
+    </div> 
+    {% endif %}   
+</div>
+    <div class="section2">
+        <div class="games">
+            <form action="">
+                <div class="games-row">
+                <h3>Top Games</h3>
+                <a class = "gameslink" href="/games">All games</a>
+            </div>
+                <div class="top_games">
+                {% for game in top_games %}
+                        <div class="game">
+                            <a href="/{{game.game}}">
+                                <img src="/static/images/gameimg/{{game.game}}.png" alt="" class="gameimg">
+                            </a>
+                            <div class="gametitle">{{game.game.title()}}</div>
+                        </div>
+                {% endfor %}
+                </div>
+            </form>
+        </div>
+        <div class="scoreboard">
+            <h3>Games Top Players</h3>        
+
+            <table class="player-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>User Name</th>
+                        <th>Game</th>
+                        <th>Highest Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for player in top_players %}
+                    <tr class="player-row">
+                        <td><img class="playerimg" src="/static/images/profileimg/{{ player.profileimg }}.png" alt=""></td>
+                        <td>{{ player.username.title()}}</td>
+                        <td>{{ player.game.title() }}</td>
+                        <td>{{ player.highest_score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>        
+        </div>
+    </div>
+
+</div>
+{% endblock %}

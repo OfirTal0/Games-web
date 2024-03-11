@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block score %}
+<h3>Score Board</h3>        
+
+<div class="scoreboardbig">
+        <table class="player-table" >
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>User Name</th>
+                    <th>Game</th>
+                    <th>Highest Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for score in scores %}
+                <tr class="player-row">
+                    <td><img class="playerimg" src="/static/images/profileimg/{{ score.profileimg }}.png" alt=""></td>
+                    <td>{{ score.username.title()}}</td>
+                    <td>{{ score.game.title() }}</td>
+                    <td>{{ score.highest_score }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>        
+    </div>
+{% endblock %}

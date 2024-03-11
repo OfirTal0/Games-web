@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block games %}
+<div class="profile">
+<h3>Games</h3>        
+<form action="/search" class="searchbar" method="POST">
+    <input class="search" type="search" name="search_game" placeholder="Search games" required>
+    <input type="hidden" name = "action" value="game">
+    <img class="searchlogo" src="/static/images/icons/search.png" alt="">  
+</form>
+</div>
+{{error}}
+<div class="games-container">
+        {% for game in games %}
+                <div class="game">
+                    <a href="/{{game.game}}">
+                        <img src="/static/images/gameimg/{{game.game}}.png" alt="" class="gameimg">
+                    </a>
+                    <div class="gametitle">{{game.game.title()}}</div>
+                </div>
+                {%if game.game == "game" %}
+                    {% for i in range(14) %}
+                    <div class="game">
+                        <a href="/{{game.game}}">
+                            <img src="/static/images/gameimg/{{game.game}}.png" alt="" class="gameimg">
+                        </a>
+                        <div class="gametitle">{{game.game.title()}}</div>
+                    </div>
+                    {% endfor %}
+                {%endif %}
+        {% endfor %}
+</div>
+{% endblock %}
