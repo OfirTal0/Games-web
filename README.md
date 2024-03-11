@@ -15,14 +15,10 @@ Login validation.
 Users with admin permissions have access to a special section for managing users settings.
 
 ### Games
-Simon Game
-  A classic memory game to test and improve your memory skills. include sounds. 
-Cards War Game
-  War is a very simple card game for two players. Buttle against the computer.
-Memory Game
-  A card-matching game to test your concentration and memory (the game category can be choosen).
-Trivia Game
-  Answer a series of questions and test your knowledge in various categories. Python-based trivia game.
+1. Simon Game - A classic memory game to test and improve your memory skills. include sounds. 
+2. Cards War Game - War is a very simple card game for two players. Buttle against the computer.
+3. Memory Game - A card-matching game to test your concentration and memory (the game category can be choosen).
+4. Trivia Game - Answer a series of questions and test your knowledge in various categories. Python-based trivia game.
 
 ## Scoreboard
 The best scores for each user in each game are displayed in the score board section.
