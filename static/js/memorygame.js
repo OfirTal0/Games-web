@@ -142,6 +142,7 @@ function checkCouple(coupleList, coupleidList) {
         console.log(idmatched.length)
         if (idmatched.length === 16) {
             alert('You have matched all the cards! Your points: ' + points + '. Well done');
+            handlePoints(points)
             playAgain()
         } else {
             whatNext(coupleList, coupleidList, idmatched);
@@ -175,4 +176,29 @@ function playAgain() {
     buttonstartHtml.style.display = 'flex';
     let gamerows = document.getElementById('gamerows');
     gamerows.style.display = 'none';
+}
+
+function handlePoints(points) {
+    let memoryHighest = null;
+    let pointsExistance = false;
+    axios.get("http://127.0.0.1:5000/api/points").then(response=> {
+        const scores = response.data;
+        console.log(scores)
+        scores.map(game=> {
+            if (game.game == "memory") {
+                memoryHighest = game.highest_score;
+                console.log(memoryHighest)
+                pointsExistance = true;
+            }
+        })
+        if (pointsExistance == false) {
+            axios.post('/api/points/add', {points:points, game:'memory', action:'insert'}).then(response => {
+                console.log("add new")
+        })} 
+        else if (points > memoryHighest) {
+        axios.post('/api/points/add', {points:points, game:'memory',action:'update'}).then(response => {
+            console.log("update db")
+        })}
+    })
+
 }

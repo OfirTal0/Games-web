@@ -74,6 +74,7 @@ function winner(player_points,computer_points) {
     } if (player_points === computer_points) {
         winner_str = 'ITS A TIE' 
     }
+    handlePoints(player_points)
     endgame(winner_str)
 }
 
@@ -108,5 +109,30 @@ function round() {
     if (rounds === 11) {
         winner(player_points,computer_points)
     }
+
+}
+
+function handlePoints(points) {
+    let warHighest = null;
+    let pointsExistance = false;
+    axios.get("http://127.0.0.1:5000/api/points").then(response=> {
+        const scores = response.data;
+        console.log(scores)
+        scores.map(game=> {
+            if (game.game == "war") {
+                warHighest = game.highest_score;
+                console.log(warHighest)
+                pointsExistance = true;
+            }
+        })
+        if (pointsExistance == false) {
+            axios.post('/api/points/add', {points:points, game:'war', action:'insert'}).then(response => {
+                console.log("add new")
+        })} 
+        else if (points > warHighest) {
+        axios.post('/api/points/add', {points:points, game:'war',action:'update'}).then(response => {
+            console.log("update db")
+        })}
+    })
 
 }

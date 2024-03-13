@@ -59,7 +59,7 @@ function checkPatterns(playerPattern) {
 
     } else {
 
-
+        handlePoints(level) 
         gameOver()
     }
 } 
@@ -149,6 +149,30 @@ for (var i=0; i<document.querySelectorAll(".squre").length; i++) {
     });
 }
 
+function handlePoints(points) {
+    let simonHighest = null;
+    let pointsExistance = false;
+    axios.get("http://127.0.0.1:5000/api/points").then(response=> {
+        const scores = response.data;
+        console.log(scores)
+        scores.map(game=> {
+            if (game.game == "simon") {
+                wsimonHighest = game.highest_score;
+                console.log(simonHighest)
+                pointsExistance = true;
+            }
+        })
+        if (pointsExistance == false) {
+            axios.post('/api/points/add', {points:points, game:'simon', action:'insert'}).then(response => {
+                console.log("add new")
+        })} 
+        else if (points > simonHighest) {
+        axios.post('/api/points/add', {points:points, game:'simon',action:'update'}).then(response => {
+            console.log("update db")
+        })}
+    })
+
+}
 
 function makesound(squrechoose) {
     switch (squrechoose) {

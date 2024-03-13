@@ -100,3 +100,13 @@ def check_new_score(game,username,profileimg,points):
         sql = f"INSERT into games_scores VALUES ('{username}', '{profileimg}', '{game}', '{points}')"
         query(sql=sql,db_name="games.db")
     return message
+
+def update_highest_score(username,points,game):
+    sql = f"UPDATE games_scores SET highest_score = {points} WHERE username = '{username}' AND game = '{game}'"
+    query(sql= sql, db_name="games.db")
+
+def insert_highest_score(username,profileimg,points,game):
+    sql = f"INSERT INTO games_scores (username,profileimg,game,highest_score) VALUES ('{username}', '{profileimg}','{game}','{points}')"
+    query(sql= sql, db_name="games.db")
+
+

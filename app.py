@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, session
 import random
-from db import query, insert_new_user,get_users,check_new_score, get_users_scores,get_games
+import json
+from db import query, insert_new_user,get_users,check_new_score, get_users_scores,get_games,update_highest_score,insert_highest_score
 app = Flask(__name__)
 
 
@@ -96,7 +97,7 @@ def register():
     if existing_users:
         return render_template('signup.html',error = f'username already exist. Please choose another')
     password = request.form.get('password')
-    profileimg = request.form.get('profileimg')
+    profileimg = request.form.get('profileimg','ghost')
     country = request.form.get('country')
     permission = 'view'
     insert_new_user(values=f"'{username}', '{password}', '{profileimg}', '{country}', '{permission}'")  
@@ -141,13 +142,13 @@ def get_trivia_data_dict():
 
 @app.route('/trivia', methods = ['POST','GET'])
 def trivia_game_start(): 
-    global user_trivia
-    user_trivia = {"points":0,"mistakes":0}
     query(sql = f"UPDATE trivia_data SET use = 'no'", db_name="games.db")
     if 'username' in session:
         username = session['username']
         profileimg = session['profileimg']
-        return render_template('trivia_game.html',trivia_display = 'start', username=username, profileimg=profileimg, points=user_trivia["points"])
+        session['trivia_points'] = 0
+        session['trivia_mistakes'] = 0
+        return render_template('trivia_game.html',trivia_display = 'start', username=username, profileimg=profileimg, points=session['trivia_points'])
     else:
         return render_template('login.html')
 
@@ -173,26 +174,24 @@ def get_avalible_categories_list():
 
 @app.route('/trivia_game_options', methods = ['POST', 'GET'])
 def trivia_game_options():
-    global user_trivia
     username = session['username']
     profileimg = session['profileimg']
-    if user_trivia["mistakes"] == 3:
+    if session['trivia_mistakes'] == 3:
         message = f'You were wrong 3 times!  Game Over'
-        return render_template('trivia_game.html',trivia_display = 'endgame', message = message, username=username, profileimg=profileimg, points=user_trivia["points"] )
+        return render_template('trivia_game.html',trivia_display = 'endgame', message = message, username=username, profileimg=profileimg, points=session['trivia_points'] )
     avalible_categories = get_avalible_categories_list()
     if len(avalible_categories) == 1: 
         category1 = avalible_categories[0]
         category2 = avalible_categories[0]
     elif len(avalible_categories) == 0:
-        message = f'No more questions left. Your score is {user_trivia["points"]}, Great Job! '
-        return render_template('trivia_game.html',trivia_display = 'endgame', message = message, username=username, profileimg=profileimg, points=user_trivia["points"])
+        message = f'No more questions left. Your score is {session['trivia_points']}, Great Job! '
+        return render_template('trivia_game.html',trivia_display = 'endgame', message = message, username=username, profileimg=profileimg, points=session['trivia_points'])
     else:
         category1, category2 = random.sample(avalible_categories, 2)
-    return render_template('trivia_game.html',trivia_display = 'options', username=username, profileimg=profileimg, points=user_trivia["points"], category1=category1, category2=category2)
+    return render_template('trivia_game.html',trivia_display = 'options', username=username, profileimg=profileimg, points=session['trivia_points'], category1=category1, category2=category2)
 
 @app.route('/trivia_questions', methods = ['POST', 'GET'])
 def questiongame():
-    global user_trivia
     global correct_answer
     username = session['username']
     profileimg = session['profileimg']
@@ -213,37 +212,47 @@ def questiongame():
     correct_answer = rand_ques["correct_answer"]
     id = rand_ques["id"]
     query(sql = f"UPDATE trivia_data SET use = 'yes' WHERE id = '{id}'", db_name="games.db")
-    return render_template('trivia_game.html',trivia_display = 'questions', username=username, profileimg=profileimg, points=user_trivia["points"], question=question,option1=option1,option2=option2,option3=option3,option4=option4, correct_answer=correct_answer )
+    return render_template('trivia_game.html',trivia_display = 'questions', username=username, profileimg=profileimg, points=session['trivia_points'], question=question,option1=option1,option2=option2,option3=option3,option4=option4, correct_answer=correct_answer )
 
 
 @app.route('/trivia_answer', methods = ['POST', 'GET'])
 def answer():
-    global user_trivia
     global correct_answer
     username = session['username']
     profileimg = session['profileimg']
     answer = request.form["answer"]
     message = ""
     if answer == correct_answer:
-        user_trivia["points"] += 2
+        points=int(session['trivia_points'])
+        points += 2
+        session['trivia_points'] = points
         message = f'Good job! You got 2 points'
     else:
-        user_trivia["mistakes"]+=1
+        mistakes=int(session['trivia_mistakes'])
+        mistakes += 1
+        session['trivia_mistakes'] = mistakes
         message = f'Wrong choice! Try again next time'
-    return render_template('trivia_game.html',trivia_display = 'answers', username=username, profileimg=profileimg, points=user_trivia["points"], message=message)
+    return render_template('trivia_game.html',trivia_display = 'answers', username=username, profileimg=profileimg, points=session['trivia_points'], message=message)
 
 
 @app.route('/trivia_endgame', methods = ['POST', 'GET'])
 def endgame():
-    global user_trivia
-    points = user_trivia["points"]
+    points = session['trivia_points']
     username = session['username']
     profileimg = session['profileimg']
-    message = check_new_score(game="trivia",username=username,profileimg=profileimg,points=points)
+    # message = check_new_score(game="trivia",username=username,profileimg=profileimg,points=points)
     query(sql = f"UPDATE trivia_data SET use = 'no'", db_name="games.db")
-    user_trivia["points"] = 0
-    user_trivia["mistakes"] = 0
-    return render_template('trivia_game.html',message =message, trivia_display = 'start', username=username, profileimg=profileimg, points=user_trivia["points"])
+    trivia_highest_score = query(sql = f"SELECT highest_score FROM games_scores WHERE username= '{username}'and game = 'trivia'", db_name="games.db")
+    if not trivia_highest_score:
+        query(sql = f"INSERT INTO games_scores (username,profileimg,game,highest_score) VALUES ('{username}', '{profileimg}','trivia','{points}')", db_name="games.db")
+    else:
+        highest_score =trivia_highest_score[0][0]
+        if  highest_score < points:
+            query(sql = f"UPDATE games_scores SET highest_score = {points} WHERE username = '{username}' AND game = 'trivia'", db_name="games.db")
+
+    session['trivia_points'] = 0
+    session['trivia_mistakes'] = 0
+    return render_template('trivia_game.html', trivia_display = 'start', username=username, profileimg=profileimg, points=points)
 
 
 
@@ -367,13 +376,32 @@ def war_game():
 
 # points
     
-@app.route('/api/points', methods = ['POST', 'GET'])
-def api():
-    username = session['username']
-    user_highest_score = query(sql = f"SELECT game,highest_score FROM games_scores WHERE username= '{username}'", db_name="games.db")    
-    # for i in messages:
-    #     username = i[0]
-    #     message = i[1]
-    #     dic = {"username":username,"message":message}
-    #     message_api.append(dic)
-    return (user_highest_score)
+
+@app.route('/api/points', methods=['POST', 'GET'])
+def get_points():
+    if 'username' in session:
+        if request.method == 'GET':
+            username = session['username']
+            user_highest_scores = query(sql=f"SELECT game, highest_score FROM games_scores WHERE username= '{username}'", db_name="games.db")
+            scores_json = [{"game": score[0], "highest_score": score[1]} for score in user_highest_scores]
+            return json.dumps(scores_json)
+    else:
+        return json.dumps({"error": "User not logged in"})
+
+@app.route('/api/points/add', methods=['POST', 'GET'])
+def memory_points():
+    if request.method == 'POST':
+        try:
+            data_received = request.json
+            username = session.get('username')
+            profileimg =  session.get('profileimg')
+            points = data_received.get('points')
+            action = data_received.get('action')
+            game = data_received.get('game')
+            if action == 'update':
+                update_highest_score(username,points,game)
+            elif action == 'insert':
+                insert_highest_score(username,profileimg,points,game)
+            return json.dumps({"success": True, "message":f"the points is {points} in game {game}"})
+        except:
+            return json.dumps({"error": "No points provided in the request"})
