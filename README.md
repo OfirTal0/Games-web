@@ -35,13 +35,19 @@ http://ofirtal.pythonanywhere.com/
 
 ### Locally: 
 1.Clone the repository:
-  git clone https://github.com/OfirTal0/Games-Web.git
+  git clone https://github.com/OfirTal0/Games-Web.git 
 2.Navigate to the project directory:
   cd Games-Web
 3.python -m pip install -r requirements.txt
 4.python ./manage.py runserver
+
+### Sign in:
+1. Create new user with sign up button
+2. For checking admin features:
+   user name: ofir123
+   password: 1234
   
 ## Needs correction and completion:
-Automatic update of the score to DB
+Additionals admin functions 
 
 Happy gaming! 🎮🚀
