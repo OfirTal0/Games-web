@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block snake_game_base %}
+
+<link rel="stylesheet" href="static\snake.css">
+<div class="profilenavbar">
+    <div class="profile">
+        <img class="userimg" src="/static/images/profileimg/{{ profileimg }}.png" alt=""> 
+        <h3>{{ username }} Good Luck!</h3>
+    </div>
+    <div id ="points" class="points">
+    0
+    </div>
+</div>
+<div class="gameboard">
+
+    <canvas id="snake_board" class="snake_board">
+        
+    </canvas>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='js/snakegame.js') }}"></script>
+{% endblock %}

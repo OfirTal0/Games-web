@@ -157,7 +157,7 @@ function handlePoints(points) {
         console.log(scores)
         scores.map(game=> {
             if (game.game == "simon") {
-                wsimonHighest = game.highest_score;
+                simonHighest = game.highest_score;
                 console.log(simonHighest)
                 pointsExistance = true;
             }

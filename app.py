@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, redirect, session
 import random
 import json
+from flask_cors import CORS
+
 from db import query, insert_new_user,get_users,check_new_score, get_users_scores,get_games,update_highest_score,insert_highest_score
 app = Flask(__name__)
+CORS(app)
 
 
 app.secret_key = 'OfirTalCode'
@@ -176,19 +179,20 @@ def get_avalible_categories_list():
 def trivia_game_options():
     username = session['username']
     profileimg = session['profileimg']
+    points = session['trivia_points']
     if session['trivia_mistakes'] == 3:
         message = f'You were wrong 3 times!  Game Over'
-        return render_template('trivia_game.html',trivia_display = 'endgame', message = message, username=username, profileimg=profileimg, points=session['trivia_points'] )
+        return render_template('trivia_game.html',trivia_display = 'endgame', message = message, username=username, profileimg=profileimg, points=points )
     avalible_categories = get_avalible_categories_list()
     if len(avalible_categories) == 1: 
         category1 = avalible_categories[0]
         category2 = avalible_categories[0]
     elif len(avalible_categories) == 0:
-        message = f'No more questions left. Your score is {session['trivia_points']}, Great Job! '
-        return render_template('trivia_game.html',trivia_display = 'endgame', message = message, username=username, profileimg=profileimg, points=session['trivia_points'])
+        message = f'No more questions left. Your score is {points}, Great Job! '
+        return render_template('trivia_game.html',trivia_display = 'endgame', message = message, username=username, profileimg=profileimg, points=points)
     else:
         category1, category2 = random.sample(avalible_categories, 2)
-    return render_template('trivia_game.html',trivia_display = 'options', username=username, profileimg=profileimg, points=session['trivia_points'], category1=category1, category2=category2)
+    return render_template('trivia_game.html',trivia_display = 'options', username=username, profileimg=profileimg, points=points, category1=category1, category2=category2)
 
 @app.route('/trivia_questions', methods = ['POST', 'GET'])
 def questiongame():
@@ -373,6 +377,18 @@ def war_game():
         profileimg = session['profileimg']
         return render_template('war_game.html',username=username, profileimg=profileimg)
     
+# snake game
+
+
+@app.route('/snake', methods=['POST', 'GET'])
+def snake_game():
+    if 'username' not in session:
+        return render_template('login.html')
+    else:
+        username = session['username']
+        profileimg = session['profileimg']
+        return render_template('snake_game.html',username=username, profileimg=profileimg)
+    
 
 # points
     
@@ -389,7 +405,7 @@ def get_points():
         return json.dumps({"error": "User not logged in"})
 
 @app.route('/api/points/add', methods=['POST', 'GET'])
-def memory_points():
+def deal_points():
     if request.method == 'POST':
         try:
             data_received = request.json

@@ -13,6 +13,28 @@ body {
     gap: 20px;
 }
 
+.login-up-button {
+    width: 100px;
+    padding: 5px;
+    background-color: #4caf65;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-in-button {
+    width: 100px;
+    padding: 5px;
+    background-color: #4c57af;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 .board {
     display: flex;
     flex-direction: column;
@@ -503,7 +525,7 @@ input {
 
 .top_games {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(3, 1fr); 
     gap:20px;
 
 }
@@ -567,6 +589,7 @@ input {
 .boxlogin {
     width: 80vw;
 }
+
 
 .gameboard {
     padding: 30px;
